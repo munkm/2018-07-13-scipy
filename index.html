@@ -2,12 +2,22 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+
+		<title>Leveraging Jupyter, Rust, and Webassembly for Browser-Based Data Exploration</title>
+
+        <meta name="description" content="
+        A talk describing a proof-of-concept jupyter widget using rust-compiled webassembly for 
+        data exploration in the browser. This talk was presented at SciPy 2018 in the DataViz track
+        on Friday, July 13th in Austin, TX.">
+        <meta name="author" content="Madicken Munk">
+        
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<title>reveal.js</title>
-
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		
+        <link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -24,8 +34,94 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+                    <h3>Leveraging Jupyter, Rust, and WebAssembly for 
+                        Browser-Based Visual Data Exploration</h3>
+                    <br/>
+                    <h4>Madicken Munk</h4>
+                    <h4>Scipy (Austin, TX), 2018.07.13</h4>
+                </section>
+                <section>
+                    <h3>About Me:</h3>
+                </section>
+                <section>
+                    <section>
+                    <h3> Why Rust? </h3>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ### Why Rust?
+
+                            * Rust is safe
+                              * Performant
+                            * Rust can compile to webassembly and packaged as a npm package
+                              * caveat: much of this is currently under development, new 
+                                functionality is added frequently.
+                              * Webassembly functions can be called and used by javascript. 
+                        </textarea>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                    <h3> What does this mean? </h3>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+                            ### What does this mean?
+
+                            #### 
+
+                        </textarea>
+                    </section>
+                </section>
+                <section>
+				    <section data-markdown>
+                        <textarea data-template>
+                            ### Installing the widget:
+
+                            * doesn't require Rust
+                            * doesn't requre you to compile to webassembly
+
+                            ```
+                            git clone https://github.com/data-exp-lab/yt-canvas-widget
+                            cd ./yt-canvas-widget
+                            pip install yt_pycanvas
+                            jupyter nbextension enable --py --sys-prefix yt_pycanvas
+                            ```
+                        </textarea>
+                    </section>
+				    <section data-markdown>
+                        <textarea data-template>
+                            ### Installing the widget (harder):
+
+                            * does require Rust (nightly) / node / npm
+
+                            ```
+                            git clone https://github.com/data-exp-lab/yt-canvas-widget
+                            git clone https://github.com/data-exp-lab/rust-yt-tools
+                            cd ./rust-yt-tools
+                            wasm-pack init --scope data-exp-lab
+                            cd ../yt-canvas-widget/js/
+                            npm install --save ../../rust-yt-tools/pkg/
+                            npm install
+                            cd ../
+                            pip install -e .
+                            jupyter nbextension install --py --symlink --sys-prefix yt_pycanvas
+                            jupyter nbextension enable --py --sys-prefix yt_pycanvas
+                            ```
+                        </textarea>
+                    </section>
+                </section>
+				<section>
+                    <h3>The end</h3>
+                    <h4>Madicken Munk</h4>
+                    <br/>
+                    <a href="https://munkm.github.io/2018-07-13-scipy">https://munkm.github.io/2018-07-13-scipy</a>
+                    <br/>
+                    <h6>
+                        <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Leveraging Jupyter, Rust, and WebAssembly for Browser-Based visual Data Exploration</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://munkm.github.io" property="cc:attributionName" rel="cc:attributionURL">Madicken Munk</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://munkm.github.io/2018-07-13-scipy" rel="dct:source">http://munkm.github.io/2018-07-13-scipy</a>.
+                    </h6>  
+                </section>
 			</div>
 		</div>
 
