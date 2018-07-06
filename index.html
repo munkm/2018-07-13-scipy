@@ -75,6 +75,16 @@
                     </section>
                 </section>
                 <section>
+                    <section data-background-iframe="https://github.com/data-exp-lab/" data-background-interactive>
+                        <li>rust-yt-tools</li>
+                        <li>yt-canvas-widget</li>
+                    </section>
+                    <section data-background-iframe="https://www.npmjs.com/package/@data-exp-lab/yt-tools" data-background-interactive>
+                        <h4>https://www.npmjs.com/package/@data-exp-lab/yt-tools</h4>
+                    </section>
+                    <section data-background-iframe="https://girder.hub.yt/#collection/5730acb5dd9119000142c361" data-background-interactive>
+                        <h4>Data for Pop II Prime</h4>
+                    </section>
 				    <section data-markdown>
                         <textarea data-template>
                             ### Installing the widget:
@@ -82,9 +92,7 @@
                             * doesn't require Rust
                             * doesn't requre you to compile to webassembly
 
-                            ```
-                            git clone https://github.com/data-exp-lab/yt-canvas-widget
-                            cd ./yt-canvas-widget
+                            ``` bash
                             pip install yt_pycanvas
                             jupyter nbextension enable --py --sys-prefix yt_pycanvas
                             ```
@@ -95,8 +103,9 @@
                             ### Installing the widget (harder):
 
                             * does require Rust (nightly) / node / npm
+                            * requires compilation to webassembly
 
-                            ```
+                            ``` bash
                             git clone https://github.com/data-exp-lab/yt-canvas-widget
                             git clone https://github.com/data-exp-lab/rust-yt-tools
                             cd ./rust-yt-tools
@@ -111,6 +120,14 @@
                             ```
                         </textarea>
                     </section>
+                </section>
+				<section>
+                    Thanks to the following collaborators:
+                    <ul>
+                    <li class="fragment">Matthew Turk</li>
+                    <li class="fragment">Nathanael Claussen</li>
+                    <li class="fragment">Nathan Goldbaum</li>
+                    <li class="fragment">Kacper Kowalik</li>
                 </section>
 				<section>
                     <h3>The end</h3>
