@@ -1,0 +1,25 @@
+#left {
+  left:-10.33%;
+  text-align: left;
+  float: left;
+  width:50%;
+  z-index:-10;
+}
+
+#right {
+  left:31.25%;
+  float: right;
+  text-align: center;
+  z-index:-10;
+  width:50%;
+}
+
+
+
+
+
+
+
+
+
+
