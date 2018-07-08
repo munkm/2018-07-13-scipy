@@ -17,7 +17,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 		
         <link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/simple.css">
+		<link rel="stylesheet" href="css/theme/white.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -42,27 +42,85 @@
                     <h4>Scipy (Austin, TX), 2018.07.13</h4>
                 </section>
                 <section>
-                    <h3>About Me:</h3>
-                    <li class="fragment">PhD from UC Berkeley, Member of BIDS</li>
-                    <li class="fragment">Postdoc in NCSA at UIUC</li>
-                    <li class="fragment">Member of the Data Exploration Lab</li>
-                    <li class="fragment">SWC Instructor, Maintainer</li>
-                    <li class="fragment">Member of DISC Committee</li>
+                    <h5>About Me:</h5>
+                        <span class="fragment">
+                            <a href="http://berkeley.edu"
+                            class="image"><img
+                            height="120"
+                            src="http://www.berkeley.edu/brand/img/seals/ucbseal_139_540.png"
+                            alt="Nuclear Engineering, University of California, Berkeley"
+                            frameborder="no"></a>
+                            <a href="http://nuc.berkeley.edu"
+                            class="image"><img
+                            height="120"
+                            src="./images/ucbneutronics.png"
+                            alt="Nuclear Engineering, University of California, Berkeley"></a>
+                            <a href="https://www.ornl.gov/division/rnsd"
+                            class="image"><img
+                            height="120"
+                            src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Oak_Ridge_National_Laboratory_logo.svg"
+                            alt="Radiation Transport Group, Oak Ridge National Laboratory"></a>
+                            <a href="http://bids.berkeley.edu"
+                            class="image"><img
+                            height="100"
+                            src="http://bids.berkeley.edu/sites/all/themes/bids/logo.png"
+                            alt="BIDS Logo"></a>
+                        </span>
+                        </br>
+                        <span class="fragment">
+                            <a
+                            href="http://upload.wikimedia.org/wikipedia/en/thumb/1/18/UIUC_seal.svg/1024px-UIUC_seal.svg"
+                            class="image"><img
+                            height="120"
+                            src="https://upload.wikimedia.org/wikipedia/en/a/af/University_of_Illinois_seal.svg"
+                            alt="illinois"></a>
+                            <a href="http://ncsa.illinois.edu"
+                            class="image"><img
+                            height="120"
+                            src="http://www.ncsa.illinois.edu/assets/img/logos_ncsa.png"
+                            alt="NCSA Logo"></a>
+                            <a href="https://data-exp-lab.github.io/"
+                            class="image"><img
+                            height="120"
+                            src="http://avatars1.githubusercontent.com/u/15057231?s=200&v=4"
+                            alt="DXL Logo"></a>
+                        </span>
                 </section>
                 <section>
                     <section>
                         <h3>Visualizing our Data</h3>
-                        Slide should have pictures of great data viz. Maybe use yt-based video/gif?
+                        <span>
+                            <img height="250" src="./images/weather.png"
+                            title="Hover over for info.">
+                            <img height="250" src="./images/illustris.jpg"
+                            title="Hover over for info.">
+                            <img height="250" src="./images/physics.png"
+                            title="Hover over for info.">
+                        </span>
+                        </br>
+                        <span>
+                            <img height="250" src="./images/weather2.png"
+                            title="Hover over for info.">
+                            <img height="250" src="./images/world.png"
+                            title="Hover over for info.">
+                            <img height="250" src="./images/meshstuff.png"
+                            title="Hover over for info.">
+                        </span>
                     </section>
                     <section>
                         <h3>Visualizing our Data Interactively</h3>
+                        <ul>
                         <li class="fragment">Interactivity allows on-the fly parameter tuning</li>
+                        <li class="fragment">... it also allows for exploration</li>
                         <li class="fragment">Reveals interesting science!</li>
                         <li class="fragment">Allows science to be accessible
+                            <ul>
                             <li class="fragment">to non-scientists</li>
                             <li class="fragment">to scientists that don't identify as "hackers"</li>
                             <li class="fragment">to scientists that are new to the data</li>
+                            </ul>
                         </li>
+                        </ul>
                     </section>
                     <section>
                         <h3>Tools Enabling Interactivity Make Science Accessible</h3>
@@ -81,39 +139,81 @@
                         * image of amr structure on "sparse" dataset
                         * image of regular grid structure of an image array
 
+                        <aside class="notes">
                         note: describe here how a server-based workflow would require re-sending an image every time the view was updated, even though the image that’s rendered might not change a whole lot.
 
                         note: this is where we highlight the math of the client-based image generation vs. the server based image generation.
+                        </aside>
                     </section>
                 </section>
                 <section>
                     <section>
                     <h3> Why Rust? </h3>
                     </section>
-                    <section data-markdown>
-                        <textarea data-template>
-                            ### Why Rust?
+                    <section>
+                        <h3>Why Rust?</h3>
+                        <ul>
+                            <li>safe</li>
+                            <li>performant</li>
+                            <li>welcoming</li>
+                            </br>
+                        <h3>Why Webassembly?</h3>
+                            <li>wasm objects work with javascript</li>
+                            <li>sandboxed memory environment</li>
+                        </ul>
 
-                            * Rust is safe
-                              * Performant
+                        <aside class="notes">
+                            Notes:
                             * Rust can compile to webassembly and packaged as a npm package
                               * caveat: much of this is currently under development, new 
                                 functionality is added frequently.
                               * Webassembly functions can be called and used by javascript. 
-                        </textarea>
+                         </aside>
+                    </section>
+                    <section>
+                        <h3> <a href="https://github.com/rustwasm/wasm-bindgen">wasm-bindgen </a></h3>
+                             <pre class="rust"><code data-trim data-noescape>
+                             
+                             #[wasm_bindgen]
+                             pub struct Foo {
+                                 internal: i32,
+                             }
+                             
+                             #[wasm_bindgen]
+                             impl Foo {
+                                 pub fn new(val: i32) -> Foo {
+                                     Foo { internal: val }
+                                 }
+                             
+                                 pub fn get(&self) -> i32 {
+                                     self.internal
+                                 }
+                             
+                                 pub fn set(&mut self, val: i32) {
+                                     self.internal = val;
+                                 }
+                             }
+                             </code></pre>
+                    </section>
+                    <section>
+                        <h3> <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a> </h3>
+                        <img data-src="http://github.com/rustwasm/wasm-pack/blob/master/demo.gif?raw=true">
+                        This can then be released as a <a href="https://www.npmjs.com/package/@data-exp-lab/yt-tools">npm package</a>
+                        <aside class="notes">
+                            wasm-pack
+                            * packages compiled to js+webassembly easily
+                            * can be uploaded to npm after packaging
+
+                            note: mention here that these packages are under active development and that features we've been using have been added as we've been developing (e.g. the wasm-bindgen examples were all added to the repo in March)
+                        </aside>
                     </section>
                 </section>
                 <section>
                     <section>
                     <h3> What does this mean? </h3>
                     </section>
-                    <section data-markdown>
-                        <textarea data-template>
-                            ### What does this mean?
-
-                            #### 
-
-                        </textarea>
+                    <section>
+                    <h3> What does this mean? </h3>
                     </section>
                 </section>
                 <section>
@@ -127,27 +227,24 @@
                     <section data-background-iframe="https://girder.hub.yt/#collection/5730acb5dd9119000142c361" data-background-interactive>
                         <h4>Data for Pop II Prime</h4>
                     </section>
-				    <section data-markdown>
-                        <textarea data-template>
-                            ### Installing the widget:
+				    <section>
+                        <h3>Installing the widget:</h3>
 
-                            * doesn't require Rust
-                            * doesn't requre you to compile to webassembly
+                        <li>doesn't require Rust</li>
+                        <li>doesn't requre you to compile to webassembly</li>
 
-                            ``` bash
+                        <pre class="bash"><code data-trim data-noescape>
                             pip install yt_pycanvas
                             jupyter nbextension enable --py --sys-prefix yt_pycanvas
-                            ```
-                        </textarea>
+                        </code></pre>
                     </section>
-				    <section data-markdown>
-                        <textarea data-template>
-                            ### Installing the widget (harder):
+				    <section>
+                        <h3>Installing the widget (harder):</h3>
 
-                            * does require Rust (nightly) / node / npm
-                            * requires compilation to webassembly
+                        <li>does require Rust (nightly) / node / npm</li>
+                        <li>requires compilation to webassembly</li>
 
-                            ``` bash
+                        <pre class="bash"><code data-trim data-noescape>
                             git clone https://github.com/data-exp-lab/yt-canvas-widget
                             git clone https://github.com/data-exp-lab/rust-yt-tools
                             cd ./rust-yt-tools
@@ -159,8 +256,7 @@
                             pip install -e .
                             jupyter nbextension install --py --symlink --sys-prefix yt_pycanvas
                             jupyter nbextension enable --py --sys-prefix yt_pycanvas
-                            ```
-                        </textarea>
+                        </code></pre>
                     </section>
                 </section>
 				<section>
@@ -177,9 +273,9 @@
                     <br/>
                     <a href="https://munkm.github.io/2018-07-13-scipy">https://munkm.github.io/2018-07-13-scipy</a>
                     <br/>
-                    <h6>
+                    <font size="5">
                         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Leveraging Jupyter, Rust, and WebAssembly for Browser-Based visual Data Exploration</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://munkm.github.io" property="cc:attributionName" rel="cc:attributionURL">Madicken Munk</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://munkm.github.io/2018-07-13-scipy" rel="dct:source">http://munkm.github.io/2018-07-13-scipy</a>.
-                    </h6>  
+                    </font>
                 </section>
 			</div>
 		</div>
