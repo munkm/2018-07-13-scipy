@@ -40,7 +40,7 @@
                         Browser-Based Visual Data Exploration</h3>
                     <br/>
                     <h4>Madicken Munk</h4>
-                    <h4>Scipy (Austin, TX), 2018.07.13</h4>
+                    <h4>Scipy (Austin, TX) 2018.07.13</h4>
                 </section>
                 <section>
                     <h5>About Me:</h5>
@@ -117,21 +117,41 @@
                         <li class="fragment">Allows science to be accessible
                             <ul>
                             <li class="fragment">to non-scientists</li>
-                            <li class="fragment">to scientists that don't identify as "hackers"</li>
-                            <li class="fragment">to scientists that are new to the data</li>
+                            <li class="fragment">to those that don't identify as "hackers"</li>
+                            <li class="fragment">to those that are new to the data</li>
                             </ul>
                         </li>
                         </ul>
                     </section>
                     <section>
                         <h3>Tools Enabling Interactivity Make Science Accessible</h3>
-                        Jupyter widgets, glue, pyviz, ipyvolume, VisIt, ParaView, vtk,
+                        <p class="fragment" style="color:purple">VisIT
+                        ParaView
+                        vtk</p>
+                        <p class="fragment" style="color:blue">glue
+                        pyviz</p>
+                        <p class="fragment" style="color:green">ipyvolume
+                        Jupyter widgets</p>
+                        <aside class="notes">
+                            Jupyter widgets allow us access to yt's powerful API while offering  an ease of use that might be difficult by using the API exclusively. 
+                        </aside>
+                    </section>
+                    <section id="isolated-I">
+                        <h3>Using Jupyter Widgets out-of-the-box With yt</h3>
+                        <font size="5"><a href="#/backup-isolated-I">backup slide</a></font> 
                     </section>
                     <section>
                         <h3>Diagram Image: Regular Widget</h3>
                     </section>
                     <section>
+                        <h3>When might this become cumbersome?</h3>
+                    </section>
+                    <section>
                         <h3>Diagram Image: Python + js + Rust</h3>
+                    </section>
+                    <section id="isolated-II">
+                        <h3>Using yt-canvas-widget</h3>
+                        <font size="5"><a href="#/backup-isolated-II">backup slide</a></font> 
                     </section>
                     <section>
                         <h3>Use case example</h3>
@@ -156,22 +176,32 @@
                         note: this is where we highlight the math of the client-based image generation vs. the server based image generation.
                         </aside>
                     </section>
+                    <section>
+                        <h3>Pushing Data to the Browser Makes Sense as</h3>
+                        <ul>
+                            <p class="fragment"><b>&#8593;</b> n</p>
+                            <p class="fragment"><b>&#8593;</b> data_{image}</p>
+                            <p class="fragment"><b>&#8595;</b> t_{client_compute}</p>
+                        </ul>
+                    </section>
                 </section>
                 <section>
                     <section>
-                    <h3> Why Rust? </h3>
-                    </section>
-                    <section>
-                        <h3>Why Rust?</h3>
+                        <h3 class="fragment">Why Webassembly?</h3>
+                            <ul class="fragment">
+                            <li>faster than js</li>
+                            <li>wasm objects work with javascript</li>
+                            <li>sandboxed memory environment</li>
+                            <li>reduces t_{client_computer}</li>
+                            </br>
+                            </ul>
+                        <h3 class="fragment">Why Rust?</h3>
                         <ul>
+                            <ul class="fragment">
                             <li>safe</li>
                             <li>performant</li>
                             <li>welcoming</li>
-                            </br>
-                        <h3>Why Webassembly?</h3>
-                            <li>wasm objects work with javascript</li>
-                            <li>sandboxed memory environment</li>
-                        </ul>
+                            </ul>
 
                         <aside class="notes">
                             Notes:
@@ -222,27 +252,82 @@
                 <section>
                     <section>
                     <h3> What does this mean? </h3>
+                        <p>With a single, fixed, up-front cost we eliminate n*t_render</p>
+                        <p>This is useful in some, but not all cases</p>
+                    </section>
+                    <section data-transition="none">
+                    <h3> How it works: the first render </h3>
+                        <span>
+                            <img class="fragment" height="600" 
+                             src="./images/FRB_1.svg" />
+                        </span>
+                    </section>
+                    <section data-transition="none">
+                    <h3> Widget Components: the FRB Viewer</h3>
+                        <span>
+                            <img height="500" 
+                             src="./images/FRB_2.svg" />
+                        </span>
+                    </section>
+                    <section data-transition="none">
+                    <h3> Widget Components: the Normalizer </h3>
+                        <span>
+                            <img height="500" 
+                             src="./images/FRB_3.svg" />
+                        </span>
                     </section>
                     <section>
-                    <h3> What does this mean? </h3>
+                    <h3> How it works: changing the colormap </h3>
+                    </section>
+                    <section>
+                    <h3> How it works: navigating with canvas interactions </h3>
                     </section>
                 </section>
                 <section>
-                    <section data-background-iframe="https://github.com/data-exp-lab/" data-background-interactive>
-                        <li>rust-yt-tools</li>
-                        <li>yt-canvas-widget</li>
+                    <section id="pop-II">
+                        <h2>Demo: Large Dataset</h2>
+                        <font size="5"><a href="#/backup-pop-II">backup slide</a></font> 
                     </section>
-                    <section data-background-iframe="https://www.npmjs.com/package/@data-exp-lab/yt-tools" data-background-interactive>
-                        <h4>https://www.npmjs.com/package/@data-exp-lab/yt-tools</h4>
+                </section>
+                <section>
+                    <section>
+                        <h3> Limitations of this Widget: </h3>
+                        <ul>
+                            <li class="fragment">requires a 2d data slice</li>
+                            <li class="fragment">limited to data sizes</li>
+                            <li class="fragment">limited functionality</li>
+                            <li class="fragment">requires maintenance in multiple package ecosystems and languages</li>
+                        </ul>
                     </section>
-                    <section data-background-iframe="https://girder.hub.yt/#collection/5730acb5dd9119000142c361" data-background-interactive>
-                        <h4>Data for Pop II Prime</h4>
+                    <section>
+                        <h3> Moving Forward </h3>
+                            <ul>
+                            <li class="fragment">Broaden the functionality of the widget
+                                <ul>
+                                <li>Linking with data units and values</li>
+                                <li>Allow for different dimensionalities</li>
+                                <li>Leverage traitlet linking for multiple field types</li>
+                                </ul>
+                            </li>
+                            <li class="fragment">Build out cross-functionality with yt</li>
+                            <li class="fragment">Be inclusive</li>
+                            </ul>
+                    </section>
+                    <section>
+                        <h3>Links</h3>
+                        <ul>
+                            <li><a href="https://github.com/data-exp-lab/rust-yt-tools">rust-yt-tools</a> repository</li>
+                            <li><a href="https://github.com/data-exp-lab/yt-canvas-widget">yt-canvas-widget</a> repository</li>
+                            <li><a href="https://girder.hub.yt/#collection/5730acb5dd9119000142c361">Data</a> and <a href="https://arxiv.org/abs/1504.07639">paper</a> for widget demonstration</a></li>
+                        </ul>
                     </section>
 				    <section>
                         <h3>Installing the widget:</h3>
 
-                        <li>doesn't require Rust</li>
-                        <li>doesn't requre you to compile to webassembly</li>
+                        <ul>
+                            <li>doesn't require Rust</li>
+                            <li>doesn't requre you to compile to webassembly</li>
+                        </ul>
 
                         <pre class="bash"><code data-trim data-noescape>
                             pip install yt_pycanvas
@@ -252,8 +337,10 @@
 				    <section>
                         <h3>Installing the widget (harder):</h3>
 
-                        <li>does require Rust (nightly) / node / npm</li>
-                        <li>requires compilation to webassembly</li>
+                        <ul>
+                            <li>does require Rust (nightly) / node / npm</li>
+                            <li>requires compilation to webassembly</li>
+                        </ul>
 
                         <pre class="bash"><code data-trim data-noescape>
                             git clone https://github.com/data-exp-lab/yt-canvas-widget
@@ -277,6 +364,7 @@
                     <li class="fragment">Nathanael Claussen</li>
                     <li class="fragment">Nathan Goldbaum</li>
                     <li class="fragment">Kacper Kowalik</li>
+                    </ul>
                 </section>
 				<section>
                     <h3>The end</h3>
@@ -287,6 +375,23 @@
                     <font size="5">
                         <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Leveraging Jupyter, Rust, and WebAssembly for Browser-Based visual Data Exploration</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://munkm.github.io" property="cc:attributionName" rel="cc:attributionURL">Madicken Munk</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://munkm.github.io/2018-07-13-scipy" rel="dct:source">http://munkm.github.io/2018-07-13-scipy</a>.
                     </font>
+                </section>
+                <section>
+                    <section>
+                        <h2>Backup Slides</h2>
+                    </section>
+                    <section id="backup-isolated-I">
+                        <h4>Backup Slides: Generic Widget w/ Isolated Galaxy</h4>
+                        <font size="5"><a href="#/isolated-I">back</a></font>
+                    </section>
+                    <section id="backup-isolated-II">
+                        <h4>Backup Slides: yt-canvas widget w/ Isolated Galaxy</h4>
+                        <font size="5"><a href="#/isolated-II">back</a></font>
+                    </section>
+                    <section id="backup-pop-II">
+                        <h4>Backup Slides: yt-canvas widget with Pop II Prime</h4>
+                        <font size="5"><a href="#/pop-II">back</a></font>
+                    </section>
                 </section>
 			</div>
 		</div>
@@ -299,6 +404,8 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+                history: true,
+
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
@@ -306,6 +413,7 @@
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
 				]
 			});
+            Reveal.configure({ slideNumber: true });
 		</script>
 	</body>
 </html>
