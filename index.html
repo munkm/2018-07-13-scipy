@@ -125,12 +125,12 @@
                     </section>
                     <section>
                         <h3>Tools Enabling Interactivity Make Science Accessible</h3>
-                        <p class="fragment" style="color:purple">VisIT
-                        ParaView
+                        <p class="fragment" style="color:purple">VisIT, 
+                        ParaView,
                         vtk</p>
-                        <p class="fragment" style="color:blue">glue
+                        <p class="fragment" style="color:blue">glue,
                         pyviz</p>
-                        <p class="fragment" style="color:green">ipyvolume
+                        <p class="fragment" style="color:green">ipyvolume,
                         Jupyter widgets</p>
                         <aside class="notes">
                             Jupyter widgets allow us access to yt's powerful API while offering  an ease of use that might be difficult by using the API exclusively. 
@@ -147,14 +147,29 @@
                         <h3>When might this become cumbersome?</h3>
                     </section>
                     <section>
-                        <h3>Diagram Image: Python + js + Rust</h3>
-                    </section>
-                    <section id="isolated-II">
-                        <h3>Using yt-canvas-widget</h3>
-                        <font size="5"><a href="#/backup-isolated-II">backup slide</a></font> 
+                        <h3>Pushing Data to the Browser Makes Sense as</h3>
+                            <p class="fragment fade-out">$\begin{align}T_{client} &< T_{server}\end{align}$</p>
+                            <p class="fragment">\[\begin{align}n \cdot t_{client} + r \cdot data_{dataset} &< n \cdot t_{server} + n \cdot r \cdot data_{image}\end{align}\]</small></p>
+                            <p class="fragment">where
+                            \[
+                            \begin{align}
+                            n &= \mbox{the total number of images rendered} \\
+                            r &= \mbox{the data transfer rate} \\
+                            t_{client} &= \mbox{the total time to compute an image on the client} \\
+                            t_{server} &= \mbox{the total time to compute an image on the server} \\
+                            \end{align}
+                            \]</small>
+                            </p>
                     </section>
                     <section>
-                        <h3>Use case example</h3>
+                        <h3>How might this happen?</h3>
+                        <ul>
+                            <p class="fragment"><b>&#8593;</b> $n$</p>
+                            <p class="fragment"><b>&#8593;</b> $data_{image}$</p>
+                            <p class="fragment"><b>&#8595;</b> $t_{client}$</p>
+                        </ul>
+                    </section>
+                    <section>
                         <div id="left">
                             <img class="fragment" width="500" style="position: absolute;" 
                              src="./images/DD0046_Projection_z_density_density_nogrid.png" />
@@ -177,83 +192,18 @@
                         </aside>
                     </section>
                     <section>
-                        <h3>Pushing Data to the Browser Makes Sense as</h3>
-                        <ul>
-                            <p class="fragment"><b>&#8593;</b> n</p>
-                            <p class="fragment"><b>&#8593;</b> data_{image}</p>
-                            <p class="fragment"><b>&#8595;</b> t_{client_compute}</p>
-                        </ul>
+                        <h3>Enter: widgets w/ webassembly performing the data-intensvie calculations</h3>
+                        <h3>Diagram Image: Python + js + Rust</h3>
                     </section>
-                </section>
-                <section>
-                    <section>
-                        <ul>
-                        <h3 class="fragment">Why Webassembly?</h3>
-                            <ul class="fragment">
-                            <li>faster than js</li>
-                            <li>wasm objects work with javascript</li>
-                            <li>sandboxed memory environment</li>
-                            <li>reduces t_{client_computer}</li>
-                            </br>
-                            </ul>
-                        <h3 class="fragment">Why Rust?</h3>
-                            <ul class="fragment">
-                            <li>safe</li>
-                            <li>performant</li>
-                            <li>welcoming</li>
-                            </ul>
-                            </ul>
-
-                        <aside class="notes">
-                            Notes:
-                            * Rust can compile to webassembly and packaged as a npm package
-                              * caveat: much of this is currently under development, new 
-                                functionality is added frequently.
-                              * Webassembly functions can be called and used by javascript. 
-                         </aside>
-                    </section>
-                    <section>
-                        <h3> <a href="https://github.com/rustwasm/wasm-bindgen">wasm-bindgen </a></h3>
-                             <pre class="rust"><code data-trim data-noescape>
-                             
-                             #[wasm_bindgen]
-                             pub struct Foo {
-                                 internal: i32,
-                             }
-                             
-                             #[wasm_bindgen]
-                             impl Foo {
-                                 pub fn new(val: i32) -> Foo {
-                                     Foo { internal: val }
-                                 }
-                             
-                                 pub fn get(&self) -> i32 {
-                                     self.internal
-                                 }
-                             
-                                 pub fn set(&mut self, val: i32) {
-                                     self.internal = val;
-                                 }
-                             }
-                             </code></pre>
-                    </section>
-                    <section>
-                        <h3> <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a> </h3>
-                        <img data-src="http://github.com/rustwasm/wasm-pack/blob/master/demo.gif?raw=true">
-                        This can then be released as a <a href="https://www.npmjs.com/package/@data-exp-lab/yt-tools">npm package</a>
-                        <aside class="notes">
-                            wasm-pack
-                            * packages compiled to js+webassembly easily
-                            * can be uploaded to npm after packaging
-
-                            note: mention here that these packages are under active development and that features we've been using have been added as we've been developing (e.g. the wasm-bindgen examples were all added to the repo in March)
-                        </aside>
+                    <section id="isolated-II">
+                        <h3>Using yt-canvas-widget</h3>
+                        <font size="5"><a href="#/backup-isolated-II">backup slide</a></font> 
                     </section>
                 </section>
                 <section>
                     <section>
                     <h3> What does this mean? </h3>
-                        <p>With a single, fixed, up-front cost we eliminate n*t_render</p>
+                        <p>With a single, fixed, up-front cost we eliminate $n \cdot t_{image\: transfer}$</p>
                         <p>This is useful in some, but not all cases</p>
                     </section>
                     <section data-transition="none">
@@ -301,6 +251,118 @@
                     </section>
                 </section>
                 <section>
+                    <section>
+                        <ul>
+                        <h3 class="fragment">Why Webassembly?</h3>
+                            <ul class="fragment">
+                            <li>faster than js</li>
+                            <li>wasm objects work with javascript</li>
+                            <li>sandboxed memory environment</li>
+                            <li>reduces  $t_{client}$</li>
+                            </br>
+                            </ul>
+                        <h3 class="fragment">Why Rust?</h3>
+                            <ul class="fragment">
+                            <li>safe</li>
+                            <li>performant</li>
+                            <li>welcoming</li>
+                            </ul>
+                            </ul>
+
+                        <aside class="notes">
+                            Notes:
+                            * Rust can compile to webassembly and packaged as a npm package
+                              * caveat: much of this is currently under development, new 
+                                functionality is added frequently.
+                              * Webassembly functions can be called and used by javascript. 
+                         </aside>
+                    </section>
+                    <section>
+                        <h3> <a href="https://github.com/rustwasm/wasm-bindgen">wasm-bindgen </a>: the rust side</h3>
+                             <pre class="rust"><code data-trim data-noescape>
+                                                             
+                             #[wasm_bindgen]
+                             pub struct VariableMesh {
+                                 px: Vec<f64>,
+                                 py: Vec<f64>,
+                                 pdx: Vec<f64>,
+                                 pdy: Vec<f64>,
+                                 val: Vec<f64>,
+                             }
+                             
+                             #[wasm_bindgen]
+                             impl VariableMesh {
+                                 pub fn new(
+                                     px: Vec<f64>,
+                                     py: Vec<f64>,
+                                     pdx: Vec<f64>,
+                                     pdy: Vec<f64>,
+                                     val: Vec<f64>,
+                                 ) -> VariableMesh {
+                                     VariableMesh {
+                                         px,
+                                         py,
+                                         pdx,
+                                         pdy,
+                                         val,
+                                     }
+                                 }
+                             }
+                             </code></pre>
+                    </section>
+
+                    <section>
+                        <h3> <a href="https://github.com/rustwasm/wasm-bindgen">wasm-bindgen </a>: the js side</h3>
+                             <pre class="javascript"><code data-trim data-noescape>
+                             /* tslint:disable */
+                             import * as wasm from './yt_tools_bg';
+                             
+                             function passArrayF64ToWasm(arg) {
+                                 const ptr = wasm.__wbindgen_malloc(arg.length * 8);
+                                 getFloat64Memory().set(arg, ptr / 8);
+                                 return [ptr, arg.length];
+                             }
+                                                             
+                             export class VariableMesh {
+                             
+                                             static __construct(ptr) {
+                                                 return new VariableMesh(ptr);
+                                             }
+                             
+                                             constructor(ptr) {
+                                                 this.ptr = ptr;
+                                             }
+                             
+                                         free() {
+                                             const ptr = this.ptr;
+                                             this.ptr = 0;
+                                             wasm.__wbg_variablemesh_free(ptr);
+                                         }
+                                     static new(arg0, arg1, arg2, arg3, arg4) {
+                                 const [ptr0, len0] = passArrayF64ToWasm(arg0);
+                                 const [ptr1, len1] = passArrayF64ToWasm(arg1);
+                                 const [ptr2, len2] = passArrayF64ToWasm(arg2);
+                                 const [ptr3, len3] = passArrayF64ToWasm(arg3);
+                                 const [ptr4, len4] = passArrayF64ToWasm(arg4);
+                                 return VariableMesh.__construct(wasm.variablemesh_new(ptr0, len0, ptr1, len1, ptr2, len2, ptr3, len3, ptr4, len4));
+                             }
+                             }
+                             </code></pre>
+                    </section>
+                    <section>
+                        <h3> <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a> </h3>
+                        <img data-src="http://github.com/rustwasm/wasm-pack/blob/master/demo.gif?raw=true">
+                        This can then be released as a <a href="https://www.npmjs.com/package/@data-exp-lab/yt-tools">npm package</a>
+                        <aside class="notes">
+                            wasm-pack
+                            * packages compiled to js+webassembly easily
+                            * can be uploaded to npm after packaging
+
+                            note: mention here that these packages are under active development and that features we've been using have been added as we've been developing (e.g. the wasm-bindgen examples were all added to the repo in March)
+                        </aside>
+                    </section>
+                </section>
+                <section>
                     <section id="pop-II">
                         <h2>Demo: Large Dataset</h2>
                         <font size="5"><a href="#/backup-pop-II">backup slide</a></font> 
@@ -314,6 +376,7 @@
                             <li class="fragment">limited to data sizes</li>
                             <li class="fragment">limited functionality</li>
                             <li class="fragment">requires maintenance in multiple package ecosystems and languages</li>
+                            <li class="fragment">the tools are new</li>
                         </ul>
                     </section>
                     <section>
@@ -342,8 +405,8 @@
                         <h3>Installing the widget:</h3>
 
                         <ul>
-                            <li>doesn't require Rust</li>
-                            <li>doesn't requre you to compile to webassembly</li>
+                            <p>doesn't require Rust</p>
+                            <p>doesn't requre you to compile to webassembly</p>
                         </ul>
 
                         <pre class="bash"><code data-trim data-noescape>
@@ -352,11 +415,11 @@
                         </code></pre>
                     </section>
 				    <section>
-                        <h3>Installing the widget (harder):</h3>
+                        <h3>Installing the widget (development):</h3>
 
                         <ul>
-                            <li>does require Rust (nightly) / node / npm</li>
-                            <li>requires compilation to webassembly</li>
+                            <p>does require Rust (nightly) / node / npm</p>
+                            <p>requires compilation to webassembly</p>
                         </ul>
 
                         <pre class="bash"><code data-trim data-noescape>
@@ -420,16 +483,35 @@
 			// More info about config & dependencies:
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-                history: true,
+            Reveal.initialize({
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    center: true,
+            
+                    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+                    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+            
+                    // Parallax scrolling
+                    // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+                    // parallaxBackgroundSize: '2100px 900px',
+            
+                    // Optional libraries used to extend on reveal.js
+                    math: {
+                            mathjax: 'https://cdn.mathjax.org/mathjax/latest/MathJax.js',
+                            config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+                        },
+                    dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+                    { src: 'plugin/math/math.js', async: true }
+                    ]
+            });
 
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
             Reveal.configure({ slideNumber: true });
 		</script>
 	</body>
