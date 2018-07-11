@@ -140,17 +140,50 @@
                         <h3>Using Jupyter Widgets out-of-the-box With yt</h3>
                         <font size="5"><a href="#/backup-isolated-I">backup slide</a></font> 
                     </section>
-                    <section>
-                        <h3>Diagram Image: Regular Widget</h3>
+                    <section data-transition="none">
+                    <h3> Rendering an Image </h3>
+                            <img class="fragment" height="500" 
+                             src="./images/server00.svg" />
+                    </section>
+                    <section data-transition="none">
+                    <h3> Rendering an Image </h3>
+                            <img height="500" 
+                             src="./images/server1.svg" />
+                    </section>
+                    <section data-transition="none">
+                    <h3> Rendering an Image </h3>
+                            <img height="500" 
+                             src="./images/server2.svg" />
+                    </section>
+                    <section data-transition="none">
+                    <h3> Rendering an Image </h3>
+                            <img height="500" 
+                             src="./images/server3.svg" />
+                    </section>
+                    <section data-transition="none">
+                    <h3> Rendering an Image </h3>
+                            <img height="500" 
+                             src="./images/server4.svg" />
                     </section>
                     <section>
                         <h3>When might this become cumbersome?</h3>
+                        <small>
+                            <p class="fragment">$t_{signal}+t_{serialization}+t_{image\: calc}+t_{push} + t_{display}$</p> 
+                        </small>
+                        <p class="fragment">$\begin{align}T_{server}  &=  t_{compute} + t_{in} + t_{out}\end{align}$</p>
+                        <p class="fragment" style="color:red">multiply by $n$ interactions</p>
+                    </section>
+                    <section>
+                        <h3>What if</h3>
+                            <img height="500" 
+                             src="./images/client0.svg" />
                     </section>
                     <section>
                         <h3>Pushing Data to the Browser Makes Sense as</h3>
                             <p class="fragment fade-out">$\begin{align}T_{client} &< T_{server}\end{align}$</p>
                             <p class="fragment">\[\begin{align}n \cdot t_{client} + r \cdot data_{dataset} &< n \cdot t_{server} + n \cdot r \cdot data_{image}\end{align}\]</small></p>
                             <p class="fragment">where
+                            </br>
                             \[
                             \begin{align}
                             n &= \mbox{the total number of images rendered} \\
@@ -190,10 +223,6 @@
 
                         note: this is where we highlight the math of the client-based image generation vs. the server based image generation.
                         </aside>
-                    </section>
-                    <section>
-                        <h3>Enter: widgets w/ webassembly performing the data-intensvie calculations</h3>
-                        <h3>Diagram Image: Python + js + Rust</h3>
                     </section>
                     <section id="isolated-II">
                         <h3>Using yt-canvas-widget</h3>
@@ -390,7 +419,8 @@
                     </section>
                     <section>
                         <h3> <a href="https://github.com/rustwasm/wasm-pack">wasm-pack</a> </h3>
-                        <img data-src="http://github.com/rustwasm/wasm-pack/blob/master/demo.gif?raw=true">
+                        <img data-src="./images/wasm-pack-demo.svg">
+                        </br>
                         This can then be released as a <a href="https://www.npmjs.com/package/@data-exp-lab/yt-tools">npm package</a>
                         <aside class="notes">
                             wasm-pack
@@ -412,10 +442,10 @@
                         <h3> Limitations of this Widget: </h3>
                         <ul>
                             <li class="fragment">requires a 2d data slice</li>
-                            <li class="fragment">limited to data sizes</li>
+                            <li class="fragment">potential limitation for data sizes</li>
                             <li class="fragment">limited functionality</li>
                             <li class="fragment">requires maintenance in multiple package ecosystems and languages</li>
-                            <li class="fragment">the tools are new</li>
+                            <li class="fragment" style="color:green">the tools are new</li>
                         </ul>
                     </section>
                     <section>
@@ -429,7 +459,7 @@
                                 </ul>
                             </li>
                             <li class="fragment">Build out cross-functionality with yt</li>
-                            <li class="fragment">Be inclusive</li>
+                            <li class="fragment">Restructure widget to enhance performance</li>
                             </ul>
                     </section>
                     <section>
