@@ -184,10 +184,7 @@
                     </section>
                     <section>
                         <h3>When might this become cumbersome?</h3>
-                        <small>
-                            <p class="fragment">$t_{signal}+t_{serialization}+t_{image\: calc}+t_{push} + t_{display}$</p> 
-                        </small>
-                        <p class="fragment">$\begin{align}T_{server}  &=  t_{compute} + t_{in} + t_{out}\end{align}$</p>
+                        <p class="fragment">$T_{server}=t_{signal}+t_{serialization}+t_{image\: calc}+t_{pull} + t_{display}$</p> 
                         <p class="fragment" style="color:red">multiply by $n$ interactions</p>
                     </section>
                     <section>
@@ -203,7 +200,7 @@
                             </br>
                             \[
                             \begin{align}
-                            n &= \mbox{the total number of images rendered} \\
+                            n &= \mbox{the total number of interactions} \\
                             r &= \mbox{the data transfer rate} \\
                             t_{client} &= \mbox{the total time to compute an image on the client} \\
                             t_{server} &= \mbox{the total time to compute an image on the server} \\
@@ -213,6 +210,7 @@
                     </section>
                     <section>
                         <h3>How might this happen?</h3>
+                            <p>\[\begin{align}n \cdot t_{client} + \frac{data_{dataset}}{r} &< n \cdot \bigg[t_{server} + \frac{data_{image}}{r}\bigg]\end{align}\]</p>
                         <ul>
                             <p class="fragment"><b>&#8593;</b> $n$</p>
                             <p class="fragment"><b>&#8593;</b> $data_{image}$</p>
@@ -340,10 +338,10 @@
                         <ul>
                         <h3 class="fragment">Why Webassembly?</h3>
                             <ul class="fragment">
-                            <li>faster than js</li>
+                            <li>fast</li>
                             <li>wasm objects work with javascript</li>
                             <li>sandboxed memory environment</li>
-                            <li>reduces  $t_{client}$</li>
+                            <li>reduces $t_{client}$</li>
                             </br>
                             </ul>
                         <h3 class="fragment">Why Rust?</h3>
@@ -450,7 +448,7 @@
                 </section>
                 <section>
                     <section id="pop-II">
-                        <h2>Demo: Larger Dataset</h2>
+                        <h2>Demo: Pop II Prime</h2>
                         <font size="5"><a href="#/backup-pop-II">backup slide</a></font> 
                     </section>
                 </section>
@@ -462,7 +460,7 @@
                             <li class="fragment">potential limitation for data sizes</li>
                             <li class="fragment">limited functionality</li>
                             <li class="fragment">requires maintenance in multiple package ecosystems and languages</li>
-                            <li class="fragment">still early in development (yt-tools @v0.2.0, yt-pycanvas @v0.1.0)</li>
+                            <li class="fragment">still early in development (yt-tools @v0.2.0, yt-pycanvas @v0.1.7)</li>
                             <li class="fragment" style="color:green">the tools are new</li>
                         </ul>
                     </section>
@@ -487,12 +485,15 @@
                             <li><a href="https://github.com/data-exp-lab/yt-canvas-widget">yt-canvas-widget</a> repository</li>
                             <li><a href="https://girder.hub.yt/#collection/5730acb5dd9119000142c361">Data</a> and <a href="https://arxiv.org/abs/1504.07639">paper</a> for widget demonstration</a></li>
                             <li><a href="http://use.yt/upload/f0982411">data slice</a> and <a href="http://use.yt/upload/ac418cf5">data projection</a> used in the demo</li>
+                            <li>Luiz Irber's <a href=https://github.com/luizirber/2018-python-rust>poster</a> on creating rust-backed python libraries (Scipy 2018)</li>
+                            <li>Rust + WebAssembly <a href="https://github.com/rustwasm/team/issues/79">news</a></li>
                         </ul>
                     </section>
 				    <section>
                         <h3>Installing the widget:</h3>
 
                         <ul>
+                            <p>we are on <a href="https://pypi.org/project/yt_pycanvas/">PyPI</a></p>
                             <p>doesn't require Rust</p>
                             <p>doesn't requre you to compile to webassembly</p>
                         </ul>
@@ -501,13 +502,13 @@
                             pip install yt_pycanvas
                             jupyter nbextension enable --py --sys-prefix yt_pycanvas
                         </code></pre>
+
                     </section>
 				    <section>
-                        <h3>Installing the widget (development):</h3>
+                        <h3>Installing the widget (development**):</h3>
 
                         <ul>
-                            <p>does require Rust (nightly) / node / npm</p>
-                            <p>requires compilation to webassembly</p>
+                           requires Rust (nightly) / node / npm, and compilation to webassembly
                         </ul>
 
                         <pre class="bash"><code data-trim data-noescape>
@@ -523,6 +524,7 @@
                             jupyter nbextension install --py --symlink --sys-prefix yt_pycanvas
                             jupyter nbextension enable --py --sys-prefix yt_pycanvas
                         </code></pre>
+                        <font size="4">**it's never this easy</font>
                     </section>
                 </section>
 				<section>
@@ -543,7 +545,7 @@
                     </ul>
                 </section>
 				<section data-background-image="http://longwallpapers.com/Desktop-Wallpaper/space-cat-background-For-Desktop-Wallpaper.jpg" style="background: rgba(255, 255, 255, 0.80);">
-                    <h3>The end</h3>
+                    <h3>Thank You!</h3>
                     <h4>Madicken Munk</h4>
                     <br/>
                     <a href="https://munkm.github.io/2018-07-13-scipy">https://munkm.github.io/2018-07-13-scipy</a>
