@@ -125,16 +125,33 @@
                     </section>
                     <section>
                         <h3>Tools Enabling Interactivity Make Science Accessible</h3>
-                        <p class="fragment" style="color:purple">VisIT, 
-                        ParaView,
-                        vtk</p>
-                        <p class="fragment" style="color:blue">glue,
-                        pyviz</p>
-                        <p class="fragment" style="color:green">ipyvolume,
-                        Jupyter widgets</p>
-                        <aside class="notes">
-                            Jupyter widgets allow us access to yt's powerful API while offering  an ease of use that might be difficult by using the API exclusively. 
-                        </aside>
+                        <span>
+                            <img height="100" src="http://holoviews.org/_static/images/logo.png"
+                            title="holoviews">
+                            <img height="100" src="https://avatars1.githubusercontent.com/u/7388996?s=200&v=4"
+                            title="Jupyter">
+                            <img height="100" src="http://docs.glueviz.org/en/stable/_static/logo.png"
+                            title="glue">
+                            <img height="100" src="https://raw.githubusercontent.com/pyviz/pyviz/master/notebooks/assets/PyViz_logo_wm.png"
+                            title="pyviz">
+                            <img height="100" src="https://docs.enthought.com/mayavi/mayavi/_static/mayavi-logo.png"
+                            title="mayavi">
+                        </span>
+                        </br>
+                        <span>
+                            <img height="100" src="./images/visitlogo.png"
+                            title="VisIT">
+                            <img width="100" src="https://gitlab.kitware.com/uploads/-/system/group/avatar/14/ParaView_Mark.png"
+                            title="ParaView">
+                            <img height="100" src="https://www.vtk.org/wp-content/uploads/2015/03/vtk_logo-main1.png"
+                            title="vtk">
+                            <img height="100" src="./images/itklogo.png"
+                            title="itk">
+                            <img height="100" src="https://bokeh.pydata.org/en/latest/_static/images/logo.png"
+                            title="bokeh">
+                        </span>
+                        </br>
+                        ipyvolume, vaex, chaco
                     </section>
                     <section id="isolated-I">
                         <h3>Using Jupyter Widgets out-of-the-box With yt</h3>
@@ -181,7 +198,7 @@
                     <section>
                         <h3>Pushing Data to the Browser Makes Sense as</h3>
                             <p class="fragment fade-out">$\begin{align}T_{client} &< T_{server}\end{align}$</p>
-                            <p class="fragment">\[\begin{align}n \cdot t_{client} + r \cdot data_{dataset} &< n \cdot t_{server} + n \cdot r \cdot data_{image}\end{align}\]</small></p>
+                            <p class="fragment">\[\begin{align}n \cdot t_{client} + \frac{data_{dataset}}{r} &< n \cdot \bigg[t_{server} + \frac{data_{image}}{r}\bigg]\end{align}\]</small></p>
                             <p class="fragment">where
                             </br>
                             \[
@@ -232,8 +249,8 @@
                 <section>
                     <section>
                     <h3> What does this mean? </h3>
-                        <p>With a single, fixed, up-front cost we eliminate $n \cdot t_{image\: transfer}$</p>
-                        <p>This is useful in some, but not all cases</p>
+                        <p>With a single, fixed, up-front cost we eliminate the requirement to transfer n images between the server and client</p>
+                        <p class="fragment">This is useful in some, but not all cases</p>
                     </section>
                     <section data-transition="none">
                     <h3> How it works: the first render </h3>
